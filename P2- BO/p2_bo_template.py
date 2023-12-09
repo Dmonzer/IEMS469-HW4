@@ -26,7 +26,7 @@ from tensorflow.keras.optimizers import SGD
 
 tf.get_logger().setLevel(logging.ERROR)
 
-
+'''
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
     for gpu in gpus:
@@ -34,10 +34,11 @@ if gpus:
         
 
 
-'''
+
 originaldir = os.getcwd()
 ## Change to the directory of where you keep your files.
 os.chdir('/nfs/home/dem1110/Assignment 4/')
+
 '''
 
 train_X_all = np.load('train_X.npy', allow_pickle=True)
@@ -176,8 +177,8 @@ def optimize_parameters(train_dataset, val_dataset):
         verbose=2)
     optimizer.maximize(n_iter=200)
     best_params = optimizer.max['params']
-    best_activation = ['relu', 'sigmoid', 'tanh'][int(best_params['activation'])]
-    best_batch_size = int(2 ** best_params['batch_size'])
+    best_activation = ['relu', 'sigmoid', 'tanh'][int(best_params['activation_ind'])]
+    best_batch_size = int(2 ** best_params['batch_size_exp'])
     print("Best activation function:", best_activation)
     print("Best batch size:", best_batch_size)
 
